@@ -6,10 +6,12 @@ import java.util.List;
 public class Game {
     //This is the class for the game setup and logic.
     private Deck deck;
-    private List<Player> players;
-    private Card adoutCard;
-    public static final int NUMBER_OF_PLAYERS = 2;
-    public static final int NUMBER_OF_HAND_CARDS = 5;
+    private Player humanPlayer;
+    private Player artificialPlayer;
+    private Card atoutCard;
+    public static final int NUMBER_OF_FIRST_DEAL_CARDS = 3;
+    public static final int NUMBER_OF_SECOND_DEAL_CARDS = 2;
+    public boolean humanPlayerIsDealer;
 
     public static void printplayInstructions() {
         //TODO: print how this game works - like user intactions etc.
@@ -18,14 +20,15 @@ public class Game {
     public Game() {
         super(); //call superclass constructor
 
-        //Creates a new card deck
+        //Creates a new card deck and shuffles it
         deck = new Deck();
+        deck.shuffle();
 
-        //TODO: shuffle deck
+        //select human player as first dealer (can be improved later)
+        humanPlayerIsDealer = true;
 
-        //select 5 cards, create 2 players and set them as their handCards, while also removing this cards from the current deck
-        players = new ArrayList<>();
-        handoutCards();
+        //select 5 cards, create 2 players and set them as their handCards, while also removing this cards from the current deck. also chooses atout card.
+        setupHandout();
 
 
         //TODO: select atoutCard from Deck (eg the card on index 0)
@@ -37,21 +40,46 @@ public class Game {
         //TODO: calculate game result & print
     }
 
-    private void handoutCards() {
-        //TODO: [not needed] implement alternating way of handing out cards
-        Player player;
-        for(int playerIndex = 0; playerIndex < NUMBER_OF_PLAYERS; playerIndex++){
+    private void setupHandout() {
 
-            List<Card> handCards = new ArrayList<>(); //create new empty list of cards
-            for (int cardNumber = 0; cardNumber < NUMBER_OF_HAND_CARDS; cardNumber++){
+        List<Card> humanHandCards = new ArrayList<>(); //create new empty list of cards
+        List<Card> artificialHandCards = new ArrayList<>(); //create new empty list of cards
+
+        //handout first set of deal cards, opponent always gets the cards first
+        if (humanPlayerIsDealer) {
+            handoutCards(artificialHandCards, NUMBER_OF_FIRST_DEAL_CARDS);
+            handoutCards(humanHandCards, NUMBER_OF_FIRST_DEAL_CARDS);
+        }
+        else {
+
+            handoutCards(humanHandCards, NUMBER_OF_FIRST_DEAL_CARDS);
+            handoutCards(artificialHandCards, NUMBER_OF_FIRST_DEAL_CARDS);
+        }
+
+        //choose atout card
+        this.atoutCard = deck.drawCard(0);
+
+        //handout second set of deal cards, opponent always gets the cards first
+        if (humanPlayerIsDealer) {
+            handoutCards(artificialHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
+            handoutCards(humanHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
+        }
+        else {
+
+            handoutCards(humanHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
+            handoutCards(artificialHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
+        }
+
+        this.artificialPlayer = new ArtificialPlayer(humanHandCards);
+        this.humanPlayer = new HumanPlayer(artificialHandCards);
+
+    }
+
+    private void handoutCards(List<Card> handCards, int numberOfCards) {
+
+            for (int cardNumber = 0; cardNumber < numberOfCards; cardNumber++){
+
                 handCards.add(deck.drawCard(0)); //always choose top card
             }
-            if (playerIndex == 0){
-                player = new ArtificialPlayer(handCards);
-            } else {
-                player = new HumanPlayer(handCards);
-            }
-            players.add(player);
-        }
     }
 }
