@@ -18,9 +18,11 @@ public class Deck {
                     entry("Dame", 3),
                     entry("Bube", 2));
 
-    private List<Card> cards = new ArrayList<>();
+    private List<Card> cards;
 
     public Deck() {
+        super();
+        cards = new ArrayList<>();
         _generateDeck();
     }
 
@@ -35,4 +37,10 @@ public class Deck {
             }
         }
     }
+    public Card drawCard(int index){
+        Card card = cards.get(index);
+        cards.remove(index);
+        return card;
+    }
+    //public Card removeCard
 }

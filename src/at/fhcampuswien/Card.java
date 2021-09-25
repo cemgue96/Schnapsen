@@ -26,4 +26,9 @@ public class Card {
         this.color = color;
         this.value = value;
     }
+
+    //TODO: create a function to print the card in a fancy way (even though we are a terminal application)
+    /*public void print() {
+
+    }*/
 }
