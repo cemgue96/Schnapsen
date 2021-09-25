@@ -30,10 +30,8 @@ public class Game {
         //select 5 cards, create 2 players and set them as their handCards, while also removing this cards from the current deck. also chooses atout card.
         setupHandout();
 
-
-        //TODO: select atoutCard from Deck (eg the card on index 0)
-
-        //TODO: print current adoutcard
+        //print the atout card
+        System.out.println("The atout card is: " + this.atoutCard.getColor() + " " + this.atoutCard.getValue().getKey());
 
         //TODO: randomPlayCards -> create Function for playing Cards
 
