@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class Player {
     protected List<Card> handCards;
-    protected List<Card> playedCards;
+    protected List<Card> stackCards;
 
     public Card chooseCard() {
         //TODO: implement genious way on how to choose a card
@@ -14,13 +14,13 @@ public abstract class Player {
         int index = (int)(Math.random() * handCards.size());
         Card chosenCard = handCards.get(index);
         handCards.remove(index);
-        playedCards.add(chosenCard);
+
 
         return chosenCard;
     }
 
     public Player(List<Card> handCards) {
         this.handCards = handCards;
-        playedCards = new ArrayList<>();
+        stackCards = new ArrayList<>();
     }
 }
