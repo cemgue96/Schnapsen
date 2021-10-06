@@ -31,7 +31,7 @@ public class Game {
         setupHandout();
 
         //print the atout card
-        System.out.println("The atout card is: " + this.atoutCard.getColor() + " " + this.atoutCard.getValue().getKey());
+        GameUI.printAtoutCard(this.atoutCard);
 
         //TODO: randomPlayCards -> create Function for playing Cards
 
