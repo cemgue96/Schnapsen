@@ -1,9 +1,7 @@
 package at.fhcampuswien;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import static java.util.Map.entry;
 
 public class Deck {
@@ -27,8 +25,9 @@ public class Deck {
     }
 
     public void shuffle(){
-        //TODO implement shuffle
+        Collections.shuffle(this.cards);
     }
+
     private void _generateDeck(){
         for (String color : COLOURS){
             for (Map.Entry<String, Integer> value : VALUES.entrySet()){
@@ -37,6 +36,7 @@ public class Deck {
             }
         }
     }
+
     public Card drawCard(int index){
         Card card = cards.get(index);
         cards.remove(index);
