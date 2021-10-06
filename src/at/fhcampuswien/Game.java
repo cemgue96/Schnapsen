@@ -35,7 +35,7 @@ public class Game {
 
         //TODO: randomPlayCards -> create Function for playing Cards
 
-        //TODO: calculate game result & print
+        //TODO: calculate game result & print > print should be done in GameInterface
     }
 
     private void setupHandout() {
