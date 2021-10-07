@@ -33,6 +33,8 @@ public class Game {
         //print the atout card
         GameUI.printAtoutCard(this.atoutCard);
 
+        GameUI.printHumanPlayerCard(this.humanPlayer);
+
         //TODO: randomPlayCards -> create Function for playing Cards
 
         //TODO: calculate game result & print > print should be done in GameInterface
