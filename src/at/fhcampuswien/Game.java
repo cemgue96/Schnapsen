@@ -68,8 +68,8 @@ public class Game {
             handoutCards(artificialHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
         }
 
-        this.artificialPlayer = new ArtificialPlayer(artificialHandCards);
-        this.humanPlayer = new HumanPlayer(humanHandCards);
+        this.artificialPlayer = new ArtificialPlayer(artificialHandCards, "Computer");
+        this.humanPlayer = new HumanPlayer(humanHandCards, "You");
 
     }
 
