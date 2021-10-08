@@ -24,6 +24,10 @@ public class Game {
     public Game() {
         super(); //call superclass constructor
 
+        GameUI.printText("-----------------------------------------------------");
+        GameUI.printText("♠♣♥♦       SCHNAPSEN - let's play a game!       ♠♣♥♦");
+        GameUI.printText("-----------------------------------------------------");
+
         //Creates a new card deck and shuffles it
         deck = new Deck();
         deck.shuffle();
@@ -121,12 +125,7 @@ public class Game {
                 firstPlayer.handCards.add(this.atoutCard);
             }
 
-            if (secondPlayer.equals(humanPlayer)) {
-                humanPlayerHasTurn = true;
-            }
-            else {
-                humanPlayerHasTurn = false;
-            }
+            humanPlayerHasTurn = secondPlayer.equals(humanPlayer);
         }
         else {
             firstPlayer.stackCards.add(firstCard);
@@ -143,12 +142,7 @@ public class Game {
                 secondPlayer.handCards.add(this.atoutCard);
             }
 
-            if (secondPlayer.equals(humanPlayer)) {
-                humanPlayerHasTurn = false;
-            }
-            else {
-                humanPlayerHasTurn = true;
-            }
+            humanPlayerHasTurn = !secondPlayer.equals(humanPlayer);
         }
     }
 
