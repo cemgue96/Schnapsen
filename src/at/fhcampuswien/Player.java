@@ -6,6 +6,7 @@ import java.util.List;
 public abstract class Player {
     protected List<Card> handCards;
     protected List<Card> stackCards;
+    protected String playerName;
 
     public Card chooseCard() {
         //TODO: implement genious way on how to choose a card
@@ -19,8 +20,9 @@ public abstract class Player {
         return chosenCard;
     }
 
-    public Player(List<Card> handCards) {
+    public Player(List<Card> handCards, String playerName) {
         this.handCards = handCards;
+        this.playerName = playerName;
         stackCards = new ArrayList<>();
     }
 }
