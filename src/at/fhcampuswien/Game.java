@@ -12,6 +12,10 @@ public class Game {
     public static final int NUMBER_OF_FIRST_DEAL_CARDS = 3;
     public static final int NUMBER_OF_SECOND_DEAL_CARDS = 2;
     public boolean humanPlayerIsDealer;
+    public boolean humanPlayerHasTurn;
+    public boolean cardsAvailable;
+    public int humanPlayerPoints;
+    public int artificialPlayerPoints;
 
     public static void printplayInstructions() {
         //TODO: print how this game works - like user intactions etc.
@@ -26,6 +30,8 @@ public class Game {
 
         //select human player as first dealer (can be improved later)
         humanPlayerIsDealer = true;
+        humanPlayerHasTurn = true;
+        cardsAvailable = true;
 
         //select 5 cards, create 2 players and set them as their handCards, while also removing this cards from the current deck. also chooses atout card.
         setupHandout();
