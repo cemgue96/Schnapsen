@@ -102,6 +102,54 @@ public class Game {
 
         Card firstCard = firstPlayer.chooseCard();
         Card secondCard = secondPlayer.chooseCard();
+
+        GameUI.printChosenCard(firstPlayer.playerName, firstCard);
+        GameUI.printChosenCard(secondPlayer.playerName, secondCard);
+
+        if (trumpChecker(firstCard, secondCard)) {
+            secondPlayer.stackCards.add(firstCard);
+            secondPlayer.stackCards.add(secondCard);
+
+            GameUI.printTrumpText(secondPlayer.playerName);
+
+            if (deck.getLength() > 1) {
+                handoutCards(secondPlayer.handCards, 1);
+                handoutCards(firstPlayer.handCards, 1);
+            }
+            else if (deck.getLength() == 1) {
+                handoutCards(secondPlayer.handCards, 1);
+                firstPlayer.handCards.add(this.atoutCard);
+            }
+
+            if (secondPlayer.equals(humanPlayer)) {
+                humanPlayerHasTurn = true;
+            }
+            else {
+                humanPlayerHasTurn = false;
+            }
+        }
+        else {
+            firstPlayer.stackCards.add(firstCard);
+            firstPlayer.stackCards.add(secondCard);
+
+            GameUI.printTrumpText(firstPlayer.playerName);
+
+            if (deck.getLength() > 1) {
+                handoutCards(firstPlayer.handCards, 1);
+                handoutCards(secondPlayer.handCards, 1);
+            }
+            else if (deck.getLength() == 1) {
+                handoutCards(firstPlayer.handCards, 1);
+                secondPlayer.handCards.add(this.atoutCard);
+            }
+
+            if (secondPlayer.equals(humanPlayer)) {
+                humanPlayerHasTurn = false;
+            }
+            else {
+                humanPlayerHasTurn = true;
+            }
+        }
     }
 
     private int calculatePoints(List<Card> stackCards) {
