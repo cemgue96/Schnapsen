@@ -80,8 +80,13 @@ public class Game {
                 handCards.add(deck.drawCard(0)); //always choose top card
             }
     }
-
     private int calculatePoints(List<Card> stackCards) {
-        return 0;
+        int points = 0;
+
+        for (Card card : stackCards){
+            points += card.getValue().getValue();
+        }
+
+        return points;
     }
 }

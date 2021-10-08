@@ -10,8 +10,7 @@ public class Card {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColor(String color) { this.color = color;
     }
 
     public Map.Entry<String, Integer> getValue() {
