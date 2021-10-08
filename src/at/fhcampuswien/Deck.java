@@ -28,6 +28,10 @@ public class Deck {
         Collections.shuffle(this.cards);
     }
 
+    public int getLength() {
+        return this.cards.size();
+    }
+
     private void _generateDeck(){
         for (String color : COLOURS){
             for (Map.Entry<String, Integer> value : VALUES.entrySet()){
