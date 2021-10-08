@@ -10,6 +10,10 @@ public class GameUI {
         System.out.println(playerName + " gathered " + points + " points!");
     }
 
+    public static void printWinnerText(String playerName) {
+        System.out.println(playerName + " won the game!");
+    }
+
     public static void printChosenCard(String playerName, Card card) {
         System.out.println(playerName + " played the card: " + card.getColor() + card.getValue().getKey());
     }
