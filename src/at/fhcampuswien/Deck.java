@@ -7,7 +7,7 @@ import static java.util.Map.entry;
 public class Deck {
 
     public static final List<String> COLOURS =
-            new ArrayList<>(Arrays.asList("Kreuz", "Pik", "Karo", "Herz"));
+            new ArrayList<>(Arrays.asList("♣", "♠", "♦", "♥"));
     public static final Map<String, Integer> VALUES =
             Map.ofEntries(
                     entry("Ass", 11),
