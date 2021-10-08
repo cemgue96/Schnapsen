@@ -43,9 +43,21 @@ public class Game {
         //print the atout card
         GameUI.printAtoutCard(this.atoutCard);
 
-        //TODO: randomPlayCards -> create Function for playing Cards
+        startGame();
 
         //TODO: calculate game result & print > print should be done in GameInterface
+    }
+
+    private void startGame() {
+        while(cardsAvailable) {
+            GameUI.printHandCards(humanPlayer.handCards);
+
+            playCards();
+
+            if (humanPlayer.handCards.size() < 1) {
+                cardsAvailable = false;
+            }
+        }
     }
 
     private void setupHandout() {
