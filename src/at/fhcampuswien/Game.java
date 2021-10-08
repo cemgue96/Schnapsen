@@ -45,7 +45,18 @@ public class Game {
 
         startGame();
 
-        //TODO: calculate game result & print > print should be done in GameInterface
+        humanPlayerPoints = calculatePoints(humanPlayer.stackCards);
+        artificialPlayerPoints = calculatePoints(artificialPlayer.stackCards);
+
+        GameUI.printPoints(humanPlayer.playerName, humanPlayerPoints);
+        GameUI.printPoints(artificialPlayer.playerName, artificialPlayerPoints);
+
+        if (humanPlayerPoints > artificialPlayerPoints) {
+            GameUI.printWinnerText(humanPlayer.playerName);
+        }
+        else {
+            GameUI.printWinnerText(artificialPlayer.playerName);
+        }
     }
 
     private void startGame() {
