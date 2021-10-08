@@ -89,4 +89,14 @@ public class Game {
 
         return points;
     }
+    //checks if second Card is a trump
+    private boolean trumpChecker(Card firstCard, Card secondCard) {
+        if (atoutCard.getColor().equals(firstCard.getColor()) &&  !atoutCard.getColor().equals(secondCard.getColor())) {
+            return false;
+        }
+        else if ( !atoutCard.getColor().equals(firstCard.getColor()) && atoutCard.getColor().equals(secondCard.getColor())) {
+            return true;
+        }
+        else return firstCard.getColor().equals(secondCard.getColor()) && firstCard.getValue().getValue() < secondCard.getValue().getValue();
+    }
 }
