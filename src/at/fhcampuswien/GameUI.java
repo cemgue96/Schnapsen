@@ -8,6 +8,10 @@ public class GameUI {
         System.out.println("The atout card is: " + atoutCard.getColor() + " " + atoutCard.getValue().getKey());
     }
 
+    public static void printText(String text) {
+        System.out.println(text);
+    }
+    
     public static void printHandCards(List<Card> handCards) {
         System.out.print("Your hand cards are: ");
         for (Card card : handCards) {
@@ -33,3 +37,4 @@ public class GameUI {
         System.out.print(System.lineSeparator());
     }
 }
+
