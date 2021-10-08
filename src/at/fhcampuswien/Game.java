@@ -86,6 +86,24 @@ public class Game {
                 handCards.add(deck.drawCard(0)); //always choose top card
             }
     }
+
+    private void playCards() {
+        Player firstPlayer;
+        Player secondPlayer;
+
+        if (humanPlayerHasTurn) {
+            firstPlayer = humanPlayer;
+            secondPlayer = artificialPlayer;
+        }
+        else {
+            firstPlayer = artificialPlayer;
+            secondPlayer = humanPlayer;
+        }
+
+        Card firstCard = firstPlayer.chooseCard();
+        Card secondCard = secondPlayer.chooseCard();
+    }
+
     private int calculatePoints(List<Card> stackCards) {
         int points = 0;
 
