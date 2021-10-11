@@ -19,7 +19,7 @@ public class Deck {
 
     protected static final List<String> COLOURS = Arrays.asList(SYMBOL_PIK, SYMBOL_TREFF, SYMBOL_KARO, SYMBOL_HERZ);
 
-    public static final List<String> CARDS = Arrays.asList(Card.CARDNAME_ASS, Card.CARDNAME_KING, Card.CARDNAME_QUEEN,Card.CARDNAME_JACK,Card.CARDNAME_TEN);
+    public static final List<String> CARDS = Arrays.asList(Card.NAME_ASS, Card.NAME_KING, Card.NAME_QUEEN,Card.NAME_JACK,Card.NAME_TEN);
 
 
     private List<Card> cards = new ArrayList<>();

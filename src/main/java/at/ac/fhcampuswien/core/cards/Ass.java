@@ -8,11 +8,11 @@ public class Ass extends Card{
 
     @Override
     public String getName() {
-        return CARDNAME_ASS;
+        return NAME_ASS;
     }
 
     @Override
     public int getValue() {
-        return CARDVALUE_ASS;
+        return VALUE_ASS;
     }
 }

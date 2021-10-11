@@ -3,21 +3,21 @@ package at.ac.fhcampuswien.core.cards;
 
 public abstract class Card {
 
-    public static final int CARDVALUE_ASS = 11;
-    protected static final int CARDVALUE_KING = 4;
-    protected static final int CARDVALUE_QUEEN = 3;
-    protected static final int CARDVALUE_TEN = 10;
-    protected static final int CARDVALUE_JACK = 2;
+    protected static final int VALUE_ASS = 11;
+    protected static final int VALUE_KING = 4;
+    protected static final int VALUE_QUEEN = 3;
+    protected static final int VALUE_TEN = 10;
+    protected static final int VALUE_JACK = 2;
 
-    public static final String CARDNAME_ASS = "Ass";
-    public static final String CARDNAME_KING = "König";
-    public static final String CARDNAME_QUEEN = "Dame";
-    public static final String CARDNAME_TEN = "Zehner";
-    public static final String CARDNAME_JACK = "Bube";
+    public static final String NAME_ASS = "Ass";
+    public static final String NAME_KING = "König";
+    public static final String NAME_QUEEN = "Dame";
+    public static final String NAME_TEN = "Zehner";
+    public static final String NAME_JACK = "Bube";
 
-    private String color;
+    private final String color;
 
-    public Card(String color) {
+    protected Card(String color) {
         this.color = color;
     }
 

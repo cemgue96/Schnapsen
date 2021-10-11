@@ -8,11 +8,11 @@ public class King extends Card{
 
     @Override
     public String getName() {
-        return CARDNAME_KING;
+        return NAME_KING;
     }
 
     @Override
     public int getValue() {
-        return CARDVALUE_KING;
+        return VALUE_KING;
     }
 }
