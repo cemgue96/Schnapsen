@@ -1,4 +1,7 @@
-package at.fhcampuswien;
+package at.ac.fhcampuswien.core;
+
+import at.ac.fhcampuswien.core.cards.Card;
+import at.ac.fhcampuswien.gui.GameUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +26,9 @@ public class Game {
 
     public Game() {
         super(); //call superclass constructor
+    }
 
+    public void run() {
         GameUI.printText("-----------------------------------------------------");
         GameUI.printText("♠♣♥♦       SCHNAPSEN - let's play a game!       ♠♣♥♦");
         GameUI.printText("-----------------------------------------------------");
@@ -173,7 +178,7 @@ public class Game {
         int points = 0;
 
         for (Card card : stackCards){
-            points += card.getValue().getValue();
+            points += card.getValue();
         }
 
         return points;
@@ -186,6 +191,6 @@ public class Game {
         else if ( !atoutCard.getColor().equals(firstCard.getColor()) && atoutCard.getColor().equals(secondCard.getColor())) {
             return true;
         }
-        else return firstCard.getColor().equals(secondCard.getColor()) && firstCard.getValue().getValue() < secondCard.getValue().getValue();
+        else return firstCard.getColor().equals(secondCard.getColor()) && firstCard.getValue() < secondCard.getValue();
     }
 }

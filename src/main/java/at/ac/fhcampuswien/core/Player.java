@@ -1,4 +1,6 @@
-package at.fhcampuswien;
+package at.ac.fhcampuswien.core;
+
+import at.ac.fhcampuswien.core.cards.Card;
 
 import java.util.ArrayList;
 import java.util.List;
