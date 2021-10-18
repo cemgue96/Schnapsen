@@ -1,4 +1,7 @@
-package at.fhcampuswien;
+package at.ac.fhcampuswien.core;
+
+import at.ac.fhcampuswien.core.cards.Card;
+import at.ac.fhcampuswien.gui.GameUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +26,9 @@ public class Game {
 
     public Game() {
         super(); //call superclass constructor
+    }
 
+    public void run() {
         GameUI.printText("-----------------------------------------------------");
         GameUI.printText("♠♣♥♦       SCHNAPSEN - let's play a game!       ♠♣♥♦");
         GameUI.printText("-----------------------------------------------------");
@@ -53,8 +58,7 @@ public class Game {
 
         if (humanPlayerPoints > artificialPlayerPoints) {
             GameUI.printWinnerText(humanPlayer.playerName);
-        }
-        else {
+        } else {
             GameUI.printWinnerText(artificialPlayer.playerName);
         }
     }
@@ -62,9 +66,7 @@ public class Game {
     private void startGame() {
         while(cardsAvailable) {
             GameUI.printHandCards(humanPlayer.handCards);
-
             playCards();
-
             if (humanPlayer.handCards.size() < 1) {
                 cardsAvailable = false;
             }
@@ -72,7 +74,6 @@ public class Game {
     }
 
     private void setupHandout() {
-
         List<Card> humanHandCards = new ArrayList<>(); //create new empty list of cards
         List<Card> artificialHandCards = new ArrayList<>(); //create new empty list of cards
 
@@ -80,9 +81,7 @@ public class Game {
         if (humanPlayerIsDealer) {
             handoutCards(artificialHandCards, NUMBER_OF_FIRST_DEAL_CARDS);
             handoutCards(humanHandCards, NUMBER_OF_FIRST_DEAL_CARDS);
-        }
-        else {
-
+        } else {
             handoutCards(humanHandCards, NUMBER_OF_FIRST_DEAL_CARDS);
             handoutCards(artificialHandCards, NUMBER_OF_FIRST_DEAL_CARDS);
         }
@@ -94,16 +93,12 @@ public class Game {
         if (humanPlayerIsDealer) {
             handoutCards(artificialHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
             handoutCards(humanHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
-        }
-        else {
-
+        } else {
             handoutCards(humanHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
             handoutCards(artificialHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
         }
-
         this.artificialPlayer = new ArtificialPlayer(artificialHandCards, "Computer");
         this.humanPlayer = new HumanPlayer(humanHandCards, "You");
-
     }
 
     private void handoutCards(List<Card> handCards, int numberOfCards) {
@@ -173,7 +168,7 @@ public class Game {
         int points = 0;
 
         for (Card card : stackCards){
-            points += card.getValue().getValue();
+            points += card.getValue();
         }
 
         return points;
@@ -186,6 +181,6 @@ public class Game {
         else if ( !atoutCard.getColor().equals(firstCard.getColor()) && atoutCard.getColor().equals(secondCard.getColor())) {
             return true;
         }
-        else return firstCard.getColor().equals(secondCard.getColor()) && firstCard.getValue().getValue() < secondCard.getValue().getValue();
+        else return firstCard.getColor().equals(secondCard.getColor()) && firstCard.getValue() < secondCard.getValue();
     }
 }

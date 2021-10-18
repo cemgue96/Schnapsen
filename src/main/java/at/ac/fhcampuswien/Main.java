@@ -1,4 +1,6 @@
-package at.fhcampuswien;
+package at.ac.fhcampuswien;
+
+import at.ac.fhcampuswien.core.Game;
 
 public class Main {
 
@@ -10,6 +12,7 @@ public class Main {
 
         //Start a new game based on player input - for now start with new game automatically
         Game game = new Game();
+        game.run();
 
     }
 }

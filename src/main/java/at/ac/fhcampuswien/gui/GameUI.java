@@ -1,11 +1,13 @@
-package at.fhcampuswien;
+package at.ac.fhcampuswien.gui;
+
+import at.ac.fhcampuswien.core.cards.Card;
 
 import java.util.List;
 
 public class GameUI {
 
     public static void printAtoutCard(Card atoutCard){
-        System.out.println("The atout card is: " + atoutCard.getColor() + " " + atoutCard.getValue().getKey());
+        System.out.println("The atout card is: " + atoutCard.getColor() + " " + atoutCard.getName());
     }
 
     public static void printText(String text) {
@@ -15,7 +17,7 @@ public class GameUI {
     public static void printHandCards(List<Card> handCards) {
         System.out.print("Your hand cards are: ");
         for (Card card : handCards) {
-            System.out.print(card.getColor() + card.getValue().getKey() + " ");
+            System.out.print(card.getColor() + card.getName() + " ");
         }
         System.out.print(System.lineSeparator());
     }
@@ -29,7 +31,7 @@ public class GameUI {
     }
 
     public static void printChosenCard(String playerName, Card card) {
-        System.out.println(playerName + " played the card: " + card.getColor() + card.getValue().getKey());
+        System.out.println(playerName + " played the card: " + card.getColor() + card.getName());
     }
 
     public static void printTrumpText(String playerName) {
