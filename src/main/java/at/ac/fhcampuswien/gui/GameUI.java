@@ -23,8 +23,12 @@ public class GameUI {
         System.out.print(System.lineSeparator());
     }
 
-    public static void printPoints(String playerName, int points) {
+    public static void printPointsFinished(String playerName, int points) {
         System.out.println(playerName + " gathered " + points + " points!");
+    }
+
+    public static void printCurrentPoints(String playerName, int points) {
+        System.out.println("Current points " + playerName + ": " + points);
     }
 
     public static void printWinnerText(String playerName) {
@@ -64,6 +68,12 @@ public class GameUI {
         }
 
         return handCards.get(selectedCardIndex);
+    }
+
+    public static void showWelcomeScreen() {
+        GameUI.printText("-----------------------------------------------------");
+        GameUI.printText("♠♣♥♦       SCHNAPSEN - let's play a game!       ♠♣♥♦");
+        GameUI.printText("-----------------------------------------------------");
     }
 }
 
