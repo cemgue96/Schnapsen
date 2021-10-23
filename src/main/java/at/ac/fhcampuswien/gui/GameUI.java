@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.gui;
 
+import at.ac.fhcampuswien.core.Player;
 import at.ac.fhcampuswien.core.cards.Card;
 
 import java.util.List;
@@ -74,6 +75,10 @@ public class GameUI {
         GameUI.printText("-----------------------------------------------------");
         GameUI.printText("♠♣♥♦       SCHNAPSEN - let's play a game!       ♠♣♥♦");
         GameUI.printText("-----------------------------------------------------");
+    }
+
+    public static void printGamePointsOfPlayer(Player player) {
+        System.out.println(player.getPlayerName() + " has scored " + player.getScoredPoints() + " points!");
     }
 }
 

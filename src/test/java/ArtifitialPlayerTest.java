@@ -20,7 +20,8 @@ public class ArtifitialPlayerTest {
 
         Card atout = new Queen("♦");
 
-        Player player = new ArtificialPlayer(handCards, "Computer");
+        Player player = new ArtificialPlayer("Computer");
+        player.setHandCards(handCards);
 
         Card chosenCard = player.chooseCard(atout);
         assertEquals(4,chosenCard.getValue());
@@ -38,7 +39,8 @@ public class ArtifitialPlayerTest {
         Card atout = new Queen("♦");
         Card firstPlayedCard = new Ten("♦");
 
-        Player player = new ArtificialPlayer(handCards, "Computer");
+        Player player = new ArtificialPlayer( "Computer");
+        player.setHandCards(handCards);
 
         Card chosenCard = player.chooseCard(atout, firstPlayedCard);
         assertEquals(11,chosenCard.getValue());
@@ -57,7 +59,8 @@ public class ArtifitialPlayerTest {
         Card atout = new Queen("♠");
         Card firstPlayedCard = new Ten("♠");
 
-        Player player = new ArtificialPlayer(handCards, "Computer");
+        Player player = new ArtificialPlayer("Computer");
+        player.setHandCards(handCards);
 
         Card chosenCard = player.chooseCard(atout, firstPlayedCard);
 

@@ -8,6 +8,10 @@ import java.util.List;
 
 public class Game {
     public static final int POINTS_TO_FINISH_GAME = 66;
+    public static final int GAME_SCORE_OPPONENT_NO_TRUMP = 3;
+    public static final int MAX_POINTS_OPPONENT_DOUBLE_SCORE = 33;
+    public static final int GAME_SCORE = 1;
+    public static final int SCORE_TO_WIN = 7;
     //This is the class for the game setup and logic.
     private Deck deck;
     private Player humanPlayer;
@@ -21,6 +25,8 @@ public class Game {
     public boolean forceColor;
     public int humanPlayerPoints;
     public int artificialPlayerPoints;
+    public int humanPlayerGamePoints = 0;
+    public int artificialPlayerGamePoints = 0;
 
     public static void printplayInstructions() {
         //TODO: print how this game works - like user intactions etc.
@@ -33,6 +39,36 @@ public class Game {
     public void run() {
         GameUI.showWelcomeScreen();
 
+        this.artificialPlayer = new ArtificialPlayer("Computer");
+        this.humanPlayer = new HumanPlayer("You");
+        do {
+            setupGameRound();
+
+            //print the atout card
+            GameUI.printAtoutCard(this.atoutCard);
+
+            mainGame();
+
+            humanPlayerPoints = calculatePoints(humanPlayer.stackCards);
+            artificialPlayerPoints = calculatePoints(artificialPlayer.stackCards);
+
+            GameUI.printPointsFinished(humanPlayer.playerName, humanPlayerPoints);
+            GameUI.printPointsFinished(artificialPlayer.playerName, artificialPlayerPoints);
+
+            if (humanPlayerPoints > artificialPlayerPoints) {
+                GameUI.printWinnerText(humanPlayer.playerName);
+                humanPlayer.setScoredPoints(humanPlayer.getScoredPoints() + calculateGamePoints(artificialPlayer));
+            } else {
+                GameUI.printWinnerText(artificialPlayer.playerName);
+                artificialPlayer.setScoredPoints(artificialPlayer.getScoredPoints() + calculateGamePoints(humanPlayer));
+            }
+            GameUI.printGamePointsOfPlayer(humanPlayer);
+            GameUI.printGamePointsOfPlayer(artificialPlayer);
+        }
+        while (humanPlayer.getScoredPoints() < SCORE_TO_WIN && artificialPlayer.getScoredPoints() < SCORE_TO_WIN);
+    }
+
+    private void setupGameRound() {
         //Creates a new card deck and shuffles it
         deck = new Deck();
         deck.shuffle();
@@ -42,30 +78,16 @@ public class Game {
         humanPlayerHasTurn = true;
         cardsAvailable = true;
         forceColor = false;
+        humanPlayer.stackCards = new ArrayList<>();
+        artificialPlayer.stackCards = new ArrayList<>();
 
         //select 5 cards, create 2 players and set them as their handCards, while also removing this cards from the current deck. also chooses atout card.
         setupHandout();
-
-        //print the atout card
-        GameUI.printAtoutCard(this.atoutCard);
-
-        mainGame();
-
-        humanPlayerPoints = calculatePoints(humanPlayer.stackCards);
-        artificialPlayerPoints = calculatePoints(artificialPlayer.stackCards);
-
-        GameUI.printPointsFinished(humanPlayer.playerName, humanPlayerPoints);
-        GameUI.printPointsFinished(artificialPlayer.playerName, artificialPlayerPoints);
-
-        if (humanPlayerPoints > artificialPlayerPoints) {
-            GameUI.printWinnerText(humanPlayer.playerName);
-        } else {
-            GameUI.printWinnerText(artificialPlayer.playerName);
-        }
     }
 
     private void mainGame() {
-        while(cardsAvailable) {
+
+        while (cardsAvailable) {
             GameUI.printHandCards(humanPlayer.handCards);
             playCards();
             if (humanPlayer.handCards.size() < 1) {
@@ -104,16 +126,16 @@ public class Game {
             handoutCards(humanHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
             handoutCards(artificialHandCards, NUMBER_OF_SECOND_DEAL_CARDS);
         }
-        this.artificialPlayer = new ArtificialPlayer(artificialHandCards, "Computer");
-        this.humanPlayer = new HumanPlayer(humanHandCards, "You");
+        this.artificialPlayer.setHandCards(artificialHandCards);
+        this.humanPlayer.setHandCards(humanHandCards);
     }
 
     private void handoutCards(List<Card> handCards, int numberOfCards) {
 
-            for (int cardNumber = 0; cardNumber < numberOfCards; cardNumber++){
+        for (int cardNumber = 0; cardNumber < numberOfCards; cardNumber++) {
 
-                handCards.add(deck.drawCard(0)); //always choose top card
-            }
+            handCards.add(deck.drawCard(0)); //always choose top card
+        }
     }
 
     private void playCards() {
@@ -123,8 +145,7 @@ public class Game {
         if (humanPlayerHasTurn) {
             firstPlayer = humanPlayer;
             secondPlayer = artificialPlayer;
-        }
-        else {
+        } else {
             firstPlayer = artificialPlayer;
             secondPlayer = humanPlayer;
         }
@@ -144,15 +165,13 @@ public class Game {
             if (deck.getLength() > 1) {
                 handoutCards(secondPlayer.handCards, 1);
                 handoutCards(firstPlayer.handCards, 1);
-            }
-            else if (deck.getLength() == 1) {
+            } else if (deck.getLength() == 1) {
                 handoutCards(secondPlayer.handCards, 1);
                 firstPlayer.handCards.add(this.atoutCard);
             }
 
             humanPlayerHasTurn = secondPlayer.equals(humanPlayer);
-        }
-        else {
+        } else {
             firstPlayer.stackCards.add(firstCard);
             firstPlayer.stackCards.add(secondCard);
 
@@ -161,8 +180,7 @@ public class Game {
             if (deck.getLength() > 1) {
                 handoutCards(firstPlayer.handCards, 1);
                 handoutCards(secondPlayer.handCards, 1);
-            }
-            else if (deck.getLength() == 1) {
+            } else if (deck.getLength() == 1) {
                 handoutCards(firstPlayer.handCards, 1);
                 secondPlayer.handCards.add(this.atoutCard);
                 forceColor = true;
@@ -175,21 +193,32 @@ public class Game {
     private int calculatePoints(List<Card> stackCards) {
         int points = 0;
 
-        for (Card card : stackCards){
+        for (Card card : stackCards) {
             points += card.getValue();
         }
 
         return points;
     }
+
+    private int calculateGamePoints(Player loserPlayer) {
+        int looserPoints = calculatePoints(loserPlayer.stackCards);
+        if (looserPoints == 0) {
+            return GAME_SCORE_OPPONENT_NO_TRUMP;
+        } else if (looserPoints <= MAX_POINTS_OPPONENT_DOUBLE_SCORE) {
+            return GAME_SCORE * 2;
+        } else {
+            return GAME_SCORE;
+        }
+    }
+
     //checks if second Card is a trump
     private boolean trumpChecker(Card firstCard, Card secondCard) {
-        if (atoutCard.getColor().equals(firstCard.getColor()) &&  !atoutCard.getColor().equals(secondCard.getColor())) {
+        if (atoutCard.getColor().equals(firstCard.getColor()) && !atoutCard.getColor().equals(secondCard.getColor())) {
             return false;
-        }
-        else if ( !atoutCard.getColor().equals(firstCard.getColor()) && atoutCard.getColor().equals(secondCard.getColor())) {
+        } else if (!atoutCard.getColor().equals(firstCard.getColor()) && atoutCard.getColor().equals(secondCard.getColor())) {
             return true;
-        }
-        else return firstCard.getColor().equals(secondCard.getColor()) && firstCard.getValue() < secondCard.getValue();
+        } else
+            return firstCard.getColor().equals(secondCard.getColor()) && firstCard.getValue() < secondCard.getValue();
     }
 
     public List<Card> determinePlayableCards(List<Card> handCards, Card atoutCard, Card playedCard) {
@@ -198,27 +227,27 @@ public class Game {
         boolean playableCardsAvailable = false;
 
         for (Card card : handCards) {
-            if(atoutCard.getColor().equals(card.getColor()) && atoutCard.getColor().equals(playedCard.getColor())) {
+            if (atoutCard.getColor().equals(card.getColor()) && atoutCard.getColor().equals(playedCard.getColor())) {
                 card.isPlayable = true;
             }
-            if(playedCard.getColor().equals(card.getColor())) {
+            if (playedCard.getColor().equals(card.getColor())) {
                 card.isPlayable = true;
             }
         }
 
         for (Card card : handCards) {
-            if(card.isPlayable){
+            if (card.isPlayable) {
                 playableCardsAvailable = true;
                 break;
             }
         }
 
-        if(!playableCardsAvailable) {
+        if (!playableCardsAvailable) {
             setCardsPlayableFlag(handCards, true);
         }
 
         for (Card card : handCards) {
-            if(atoutCard.getColor().equals(card.getColor())) {
+            if (atoutCard.getColor().equals(card.getColor())) {
                 card.isPlayable = true;
             }
         }
@@ -227,7 +256,7 @@ public class Game {
     }
 
     private void setCardsPlayableFlag(List<Card> cards, boolean isPlayable) {
-        for (Card card : cards){
+        for (Card card : cards) {
             card.isPlayable = isPlayable;
         }
     }
