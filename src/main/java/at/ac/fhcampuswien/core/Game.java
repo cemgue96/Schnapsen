@@ -88,7 +88,7 @@ public class Game {
     private void mainGame() {
 
         while (cardsAvailable) {
-            GameUI.printHandCards(humanPlayer.handCards);
+            //GameUI.printHandCards(humanPlayer.handCards);
             playCards();
             if (humanPlayer.handCards.size() < 1) {
                 cardsAvailable = false;
@@ -150,7 +150,11 @@ public class Game {
             secondPlayer = humanPlayer;
         }
 
+        setCardsPlayableFlag(firstPlayer.handCards, true);
         Card firstCard = firstPlayer.chooseCard(atoutCard);
+        if(forceColor) {
+            secondPlayer.handCards = determinePlayableCards(secondPlayer.handCards, atoutCard, firstCard);
+        }
         Card secondCard = secondPlayer.chooseCard(atoutCard, firstCard);
 
         GameUI.printChosenCard(firstPlayer.playerName, firstCard);

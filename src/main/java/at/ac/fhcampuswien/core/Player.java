@@ -52,8 +52,8 @@ public abstract class Player {
     public Card chooseCard(Card atoutCard) {
         return this.chooseCard();
     }
-    public Card chooseCard(Card atoutCard, Card firstPlayedCard) {
-        return this.chooseCard(atoutCard);
+    public Card chooseCard(Card atout, Card firstPlayedCard) {
+        return this.chooseCard();
     }
 
     public Player(String playerName) {
