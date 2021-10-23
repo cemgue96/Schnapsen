@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
+    public static final int POINTS_TO_FINISH_GAME = 66;
     //This is the class for the game setup and logic.
     private Deck deck;
     private Player humanPlayer;
@@ -30,9 +31,7 @@ public class Game {
     }
 
     public void run() {
-        GameUI.printText("-----------------------------------------------------");
-        GameUI.printText("♠♣♥♦       SCHNAPSEN - let's play a game!       ♠♣♥♦");
-        GameUI.printText("-----------------------------------------------------");
+        GameUI.showWelcomeScreen();
 
         //Creates a new card deck and shuffles it
         deck = new Deck();
@@ -50,13 +49,13 @@ public class Game {
         //print the atout card
         GameUI.printAtoutCard(this.atoutCard);
 
-        startGame();
+        mainGame();
 
         humanPlayerPoints = calculatePoints(humanPlayer.stackCards);
         artificialPlayerPoints = calculatePoints(artificialPlayer.stackCards);
 
-        GameUI.printPoints(humanPlayer.playerName, humanPlayerPoints);
-        GameUI.printPoints(artificialPlayer.playerName, artificialPlayerPoints);
+        GameUI.printPointsFinished(humanPlayer.playerName, humanPlayerPoints);
+        GameUI.printPointsFinished(artificialPlayer.playerName, artificialPlayerPoints);
 
         if (humanPlayerPoints > artificialPlayerPoints) {
             GameUI.printWinnerText(humanPlayer.playerName);
@@ -65,13 +64,19 @@ public class Game {
         }
     }
 
-    private void startGame() {
+    private void mainGame() {
         while(cardsAvailable) {
             GameUI.printHandCards(humanPlayer.handCards);
             playCards();
             if (humanPlayer.handCards.size() < 1) {
                 cardsAvailable = false;
             }
+            if (calculatePoints(humanPlayer.stackCards) >= POINTS_TO_FINISH_GAME ||
+                    calculatePoints(artificialPlayer.stackCards) >= POINTS_TO_FINISH_GAME) {
+                break;
+            }
+            GameUI.printCurrentPoints(artificialPlayer.playerName, calculatePoints(artificialPlayer.stackCards));
+            GameUI.printCurrentPoints(humanPlayer.playerName, calculatePoints(humanPlayer.stackCards));
         }
     }
 
