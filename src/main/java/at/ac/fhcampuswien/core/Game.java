@@ -183,4 +183,45 @@ public class Game {
         }
         else return firstCard.getColor().equals(secondCard.getColor()) && firstCard.getValue() < secondCard.getValue();
     }
+
+    public List<Card> determinePlayableCards(List<Card> handCards, Card atoutCard, Card playedCard) {
+
+        setCardsPlayableFlag(handCards, false);
+        boolean playableCardsAvailable = false;
+
+        for (Card card : handCards) {
+            if(atoutCard.getColor().equals(card.getColor()) && atoutCard.getColor().equals(playedCard.getColor())) {
+                card.isPlayable = true;
+            }
+            if(playedCard.getColor().equals(card.getColor())) {
+                card.isPlayable = true;
+            }
+        }
+
+        for (Card card : handCards) {
+            if(card.isPlayable){
+                playableCardsAvailable = true;
+                break;
+            }
+        }
+
+        if(!playableCardsAvailable) {
+            setCardsPlayableFlag(handCards, true);
+        }
+
+        for (Card card : handCards) {
+            if(atoutCard.getColor().equals(card.getColor())) {
+                card.isPlayable = true;
+            }
+        }
+
+        return handCards;
+    }
+
+    private void setCardsPlayableFlag(List<Card> cards, boolean isPlayable) {
+        for (Card card : cards){
+            card.isPlayable = isPlayable;
+        }
+    }
+
 }
