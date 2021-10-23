@@ -7,8 +7,36 @@ import java.util.List;
 
 public abstract class Player {
     protected List<Card> handCards;
+    public List<Card> getHandCards() {
+        return handCards;
+    }
+
+    public void setHandCards(List<Card> handCards) {
+        this.handCards = handCards;
+    }
+
     protected List<Card> stackCards;
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
     protected String playerName;
+    private int scoredPoints = 0;
+
+    public int getScoredPoints() {
+        return scoredPoints;
+    }
+
+    public void setScoredPoints(int scoredPoints) {
+        this.scoredPoints = scoredPoints;
+    }
+
+
 
     public Card chooseCard() {
         //TODO: implement genious way on how to choose a card
@@ -28,9 +56,9 @@ public abstract class Player {
         return this.chooseCard(atoutCard);
     }
 
-    public Player(List<Card> handCards, String playerName) {
-        this.handCards = handCards;
+    public Player(String playerName) {
         this.playerName = playerName;
+        handCards = new ArrayList<>();
         stackCards = new ArrayList<>();
     }
 }

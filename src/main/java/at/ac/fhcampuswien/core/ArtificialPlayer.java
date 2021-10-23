@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class ArtificialPlayer extends Player {
-    public ArtificialPlayer(List<Card> handCards, String playerName) {
-        super(handCards, playerName);
+    public ArtificialPlayer(String playerName) {
+        super(playerName);
     }
 
     //TODO: implement algorithm on which an artificalPlayer generates
