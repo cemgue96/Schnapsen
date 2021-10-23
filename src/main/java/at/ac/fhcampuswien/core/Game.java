@@ -122,8 +122,8 @@ public class Game {
             secondPlayer = humanPlayer;
         }
 
-        Card firstCard = firstPlayer.chooseCard();
-        Card secondCard = secondPlayer.chooseCard();
+        Card firstCard = firstPlayer.chooseCard(atoutCard);
+        Card secondCard = secondPlayer.chooseCard(atoutCard, firstCard);
 
         GameUI.printChosenCard(firstPlayer.playerName, firstCard);
         GameUI.printChosenCard(secondPlayer.playerName, secondCard);
