@@ -3,6 +3,7 @@ package at.ac.fhcampuswien.gui;
 import at.ac.fhcampuswien.core.cards.Card;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class GameUI {
 
@@ -37,6 +38,32 @@ public class GameUI {
     public static void printTrumpText(String playerName) {
         System.out.println(playerName + " trumped!");
         System.out.print(System.lineSeparator());
+    }
+
+    public static Card selectCardToPlay(List<Card> handCards) {
+        System.out.println("Choose next Card to play: ");
+        int selectedCardIndex = -1;
+
+        for(int i = 0; i < handCards.size(); i++) {
+            System.out.print("[" + i + "]: "  + handCards.get(i) + " ");
+        }
+        System.out.print("\n");
+
+        //TODO: error could be that user does not select a right index
+        boolean rightSelection = false;
+        while (!rightSelection) {
+            Scanner cardIndexScanner = new Scanner(System.in);
+            selectedCardIndex = cardIndexScanner.nextInt();
+
+            //TODO: check if card is actually playable
+            if(selectedCardIndex >= 0 && selectedCardIndex < handCards.size()) {
+                rightSelection = true;
+            } else {
+                System.out.println("Please select allowed index!");
+            }
+        }
+
+        return handCards.get(selectedCardIndex);
     }
 }
 
