@@ -22,7 +22,7 @@ public class ArtificialPlayer extends Player {
         List<Card> cardsWhichWouldTrump = new ArrayList<>();
 
         for(Card card : handCards) {
-            if(firstPlayedCard.getColor().equals(card.getColor())) {
+            if(card.isPlayable && firstPlayedCard.getColor().equals(card.getColor())) {
                 if (firstPlayedCard.getValue() < card.getValue())
                     cardsWhichWouldTrump.add(card);
             }
@@ -62,9 +62,6 @@ public class ArtificialPlayer extends Player {
     @Override
     public Card chooseCard() {
         Collections.sort(handCards);
-
-        Card chosenCard = handCards.get(0);
-        handCards.remove(0);
-        return chosenCard;
+        return handCards.remove(0);
     }
 }

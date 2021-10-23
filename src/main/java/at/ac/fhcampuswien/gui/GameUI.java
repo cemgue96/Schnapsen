@@ -8,6 +8,11 @@ import java.util.Scanner;
 
 public class GameUI {
 
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+
     public static void printAtoutCard(Card atoutCard){
         System.out.println("The atout card is: " + atoutCard.getColor() + " " + atoutCard.getName());
     }
@@ -50,7 +55,12 @@ public class GameUI {
         int selectedCardIndex = -1;
 
         for(int i = 0; i < handCards.size(); i++) {
-            System.out.print("[" + i + "]: "  + handCards.get(i) + " ");
+            Card card = handCards.get(i);
+            if(card.isPlayable) {
+                System.out.print(ANSI_CYAN + "[" + i + ": " + handCards.get(i) + "] " + ANSI_RESET);
+            } else {
+                System.out.print(ANSI_RED + handCards.get(i) + " " + ANSI_RESET);
+            }
         }
         System.out.print("\n");
 
@@ -61,7 +71,7 @@ public class GameUI {
             selectedCardIndex = cardIndexScanner.nextInt();
 
             //TODO: check if card is actually playable
-            if(selectedCardIndex >= 0 && selectedCardIndex < handCards.size()) {
+            if(selectedCardIndex >= 0 && selectedCardIndex < handCards.size() && handCards.get(selectedCardIndex).isPlayable) {
                 rightSelection = true;
             } else {
                 System.out.println("Please select allowed index!");

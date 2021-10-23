@@ -24,7 +24,6 @@ public class HumanPlayer extends Player {
     @Override
     public Card chooseCard() {
         //TODO: get playableCards for PlayOut
-        List<Card> playableCards = handCards;
         Card selectedCard = GameUI.selectCardToPlay(handCards);
         handCards.remove(selectedCard);
         return selectedCard;
