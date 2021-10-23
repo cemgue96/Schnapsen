@@ -19,6 +19,7 @@ public abstract class Card {
 
     protected Card(String color) {
         this.color = color;
+        this.isPlayable = true;
     }
 
     public String getColor() {
@@ -28,6 +29,8 @@ public abstract class Card {
     public abstract String getName();
 
     public abstract int getValue();
+
+    public boolean isPlayable;
 
     @Override
     public String toString() {
