@@ -23,11 +23,11 @@ public class GameTest {
        Game game = new Game();
        handCards = game.determinePlayableCards(handCards, atoutCard, playedCard);
 
-       assertEquals(true, handCards.get(0).isPlayable);
-       assertEquals(false, handCards.get(1).isPlayable);
-       assertEquals(false, handCards.get(2).isPlayable);
-       assertEquals(true, handCards.get(3).isPlayable);
-       assertEquals(false, handCards.get(4).isPlayable);
+        assertTrue(handCards.get(0).isPlayable);
+        assertFalse(handCards.get(1).isPlayable);
+        assertFalse(handCards.get(2).isPlayable);
+        assertTrue(handCards.get(3).isPlayable);
+        assertFalse(handCards.get(4).isPlayable);
     }
 
     @org.junit.jupiter.api.Test
@@ -45,11 +45,11 @@ public class GameTest {
         Game game = new Game();
         handCards = game.determinePlayableCards(handCards, atoutCard, playedCard);
 
-        assertEquals(true, handCards.get(0).isPlayable);
-        assertEquals(true, handCards.get(1).isPlayable);
-        assertEquals(true, handCards.get(2).isPlayable);
-        assertEquals(true, handCards.get(3).isPlayable);
-        assertEquals(true, handCards.get(4).isPlayable);
+        assertTrue(handCards.get(0).isPlayable);
+        assertTrue(handCards.get(1).isPlayable);
+        assertTrue(handCards.get(2).isPlayable);
+        assertTrue(handCards.get(3).isPlayable);
+        assertTrue(handCards.get(4).isPlayable);
     }
 
     @org.junit.jupiter.api.Test
@@ -67,11 +67,11 @@ public class GameTest {
         Game game = new Game();
         handCards = game.determinePlayableCards(handCards, atoutCard, playedCard);
 
-        assertEquals(true, handCards.get(0).isPlayable);
-        assertEquals(true, handCards.get(1).isPlayable);
-        assertEquals(false, handCards.get(2).isPlayable);
-        assertEquals(true, handCards.get(3).isPlayable);
-        assertEquals(false, handCards.get(4).isPlayable);
+        assertTrue(handCards.get(0).isPlayable);
+        assertTrue(handCards.get(1).isPlayable);
+        assertFalse(handCards.get(2).isPlayable);
+        assertTrue(handCards.get(3).isPlayable);
+        assertFalse(handCards.get(4).isPlayable);
     }
 
     @org.junit.jupiter.api.Test
@@ -89,11 +89,11 @@ public class GameTest {
         Game game = new Game();
         handCards = game.determinePlayableCards(handCards, atoutCard, playedCard);
 
-        assertEquals(true, handCards.get(0).isPlayable);
-        assertEquals(true, handCards.get(1).isPlayable);
-        assertEquals(false, handCards.get(2).isPlayable);
-        assertEquals(true, handCards.get(3).isPlayable);
-        assertEquals(true, handCards.get(4).isPlayable);
+        assertTrue(handCards.get(0).isPlayable);
+        assertTrue(handCards.get(1).isPlayable);
+        assertFalse(handCards.get(2).isPlayable);
+        assertTrue(handCards.get(3).isPlayable);
+        assertTrue(handCards.get(4).isPlayable);
     }
 
     @org.junit.jupiter.api.Test
@@ -111,12 +111,13 @@ public class GameTest {
         Game game = new Game();
         handCards = game.determinePlayableCards(handCards, atoutCard, playedCard);
 
-        assertEquals(true, handCards.get(0).isPlayable);
-        assertEquals(true, handCards.get(1).isPlayable);
-        assertEquals(true, handCards.get(2).isPlayable);
-        assertEquals(true, handCards.get(3).isPlayable);
-        assertEquals(true, handCards.get(4).isPlayable);
+        assertTrue(handCards.get(0).isPlayable);
+        assertTrue(handCards.get(1).isPlayable);
+        assertTrue(handCards.get(2).isPlayable);
+        assertTrue(handCards.get(3).isPlayable);
+        assertTrue(handCards.get(4).isPlayable);
     }
+
 
     @org.junit.jupiter.api.Test
     void determinePlayableCards_checkNoHeartInHandNoAtoutInHandHeartPlayed() {
@@ -133,11 +134,27 @@ public class GameTest {
         Game game = new Game();
         handCards = game.determinePlayableCards(handCards, atoutCard, playedCard);
 
-        assertEquals(true, handCards.get(0).isPlayable);
-        assertEquals(true, handCards.get(1).isPlayable);
-        assertEquals(true, handCards.get(2).isPlayable);
-        assertEquals(true, handCards.get(3).isPlayable);
-        assertEquals(true, handCards.get(4).isPlayable);
+        assertTrue(handCards.get(0).isPlayable);
+        assertTrue(handCards.get(1).isPlayable);
+        assertTrue(handCards.get(2).isPlayable);
+        assertTrue(handCards.get(3).isPlayable);
+        assertTrue(handCards.get(4).isPlayable);
+    }
+
+    @org.junit.jupiter.api.Test
+    void calculatePoints_checkCalculation() {
+
+        List<Card> stackCards = new ArrayList<>();
+        stackCards.add(new Queen("♣"));
+        stackCards.add(new King("♠"));
+        stackCards.add(new Jack("♣"));
+        stackCards.add(new Ass("♣"));
+        stackCards.add(new Ten("♠"));
+        stackCards.add(new Ten("♣"));
+
+        Game game = new Game();
+
+        assertEquals(40, game.calculatePoints(stackCards));
     }
 }
 
