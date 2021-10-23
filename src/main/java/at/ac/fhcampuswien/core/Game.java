@@ -25,8 +25,6 @@ public class Game {
     public boolean forceColor;
     public int humanPlayerPoints;
     public int artificialPlayerPoints;
-    public int humanPlayerGamePoints = 0;
-    public int artificialPlayerGamePoints = 0;
 
     public static void printplayInstructions() {
         //TODO: print how this game works - like user intactions etc.
@@ -160,7 +158,7 @@ public class Game {
         GameUI.printChosenCard(firstPlayer.playerName, firstCard);
         GameUI.printChosenCard(secondPlayer.playerName, secondCard);
 
-        if (trumpChecker(firstCard, secondCard)) {
+        if (trumpChecker(firstCard, secondCard, this.atoutCard)) {
             secondPlayer.stackCards.add(firstCard);
             secondPlayer.stackCards.add(secondCard);
 
@@ -194,7 +192,7 @@ public class Game {
         }
     }
 
-    private int calculatePoints(List<Card> stackCards) {
+    public int calculatePoints(List<Card> stackCards) {
         int points = 0;
 
         for (Card card : stackCards) {
@@ -216,7 +214,7 @@ public class Game {
     }
 
     //checks if second Card is a trump
-    private boolean trumpChecker(Card firstCard, Card secondCard) {
+    public static boolean trumpChecker(Card firstCard, Card secondCard, Card atoutCard) {
         if (atoutCard.getColor().equals(firstCard.getColor()) && !atoutCard.getColor().equals(secondCard.getColor())) {
             return false;
         } else if (!atoutCard.getColor().equals(firstCard.getColor()) && atoutCard.getColor().equals(secondCard.getColor())) {
