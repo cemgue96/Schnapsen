@@ -17,6 +17,7 @@ public class Game {
     public boolean humanPlayerIsDealer;
     public boolean humanPlayerHasTurn;
     public boolean cardsAvailable;
+    public boolean forceColor;
     public int humanPlayerPoints;
     public int artificialPlayerPoints;
 
@@ -41,6 +42,7 @@ public class Game {
         humanPlayerIsDealer = true;
         humanPlayerHasTurn = true;
         cardsAvailable = true;
+        forceColor = false;
 
         //select 5 cards, create 2 players and set them as their handCards, while also removing this cards from the current deck. also chooses atout card.
         setupHandout();
@@ -158,6 +160,7 @@ public class Game {
             else if (deck.getLength() == 1) {
                 handoutCards(firstPlayer.handCards, 1);
                 secondPlayer.handCards.add(this.atoutCard);
+                forceColor = true;
             }
 
             humanPlayerHasTurn = !secondPlayer.equals(humanPlayer);
