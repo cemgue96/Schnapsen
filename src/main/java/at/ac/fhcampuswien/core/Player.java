@@ -21,6 +21,12 @@ public abstract class Player {
 
         return chosenCard;
     }
+    public Card chooseCard(Card atoutCard) {
+        return this.chooseCard();
+    }
+    public Card chooseCard(Card atoutCard, Card firstPlayedCard) {
+        return this.chooseCard(atoutCard);
+    }
 
     public Player(List<Card> handCards, String playerName) {
         this.handCards = handCards;

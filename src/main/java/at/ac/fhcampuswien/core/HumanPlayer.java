@@ -11,7 +11,15 @@ public class HumanPlayer extends Player {
         super(handCards, playerName);
     }
 
-    //TODO: override chooseCard function like printing playedCards, cards in hand and atout and let user select which card to chose
+    @Override
+    public Card chooseCard(Card atoutCard) {
+        return this.chooseCard();
+    }
+
+    @Override
+    public Card chooseCard(Card atoutCard, Card firstPlayedCard) {
+        return this.chooseCard();
+    }
 
     @Override
     public Card chooseCard() {
@@ -22,3 +30,4 @@ public class HumanPlayer extends Player {
         return selectedCard;
     }
 }
+

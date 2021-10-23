@@ -1,7 +1,9 @@
 package at.ac.fhcampuswien.core.cards;
 
 
-public abstract class Card {
+import java.util.Comparator;
+
+public abstract class Card implements Comparable<Card>{
 
     protected static final int VALUE_ASS = 11;
     protected static final int VALUE_KING = 4;
@@ -32,5 +34,10 @@ public abstract class Card {
     @Override
     public String toString() {
         return getName()+getColor();
+    }
+
+    @Override
+    public int compareTo(Card o) {
+        return Integer.compare(this.getValue(), o.getValue());
     }
 }
