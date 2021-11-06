@@ -188,7 +188,7 @@ public class GameTest {
     }
 
     @org.junit.jupiter.api.Test
-    void cardeTrumped_differenColor() {
+    void cardTrumped_differentColor() {
         Card firstHandHard = new King("♣");
         Card secondHandCard = new Queen("♠");
         Card atoutCard = new Ass("♦");
