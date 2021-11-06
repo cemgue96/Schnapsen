@@ -199,7 +199,7 @@ public class GameTest {
     }
 
     @org.junit.jupiter.api.Test
-    void setCardsPlayableFlagTrueCheck() {
+    void setCardsPlayableFlag_TrueCheck() {
         List<Card> cards = new ArrayList<>();
 
         cards.add(new Queen("♣"));
@@ -214,7 +214,7 @@ public class GameTest {
     }
 
     @org.junit.jupiter.api.Test
-    void setCardsPlayableFlagFalseCheck() {
+    void setCardsPlayableFlag_FalseCheck() {
         List<Card> cards = new ArrayList<>();
 
         cards.add(new Queen("♣"));
