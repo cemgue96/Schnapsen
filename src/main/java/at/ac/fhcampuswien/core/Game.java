@@ -257,7 +257,7 @@ public class Game {
         return handCards;
     }
 
-    private void setCardsPlayableFlag(List<Card> cards, boolean isPlayable) {
+    public static void setCardsPlayableFlag(List<Card> cards, boolean isPlayable) {
         for (Card card : cards) {
             card.isPlayable = isPlayable;
         }

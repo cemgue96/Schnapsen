@@ -1,4 +1,6 @@
 import at.ac.fhcampuswien.core.Game;
+import at.ac.fhcampuswien.core.HumanPlayer;
+import at.ac.fhcampuswien.core.Player;
 import at.ac.fhcampuswien.core.cards.*;
 
 import java.util.ArrayList;
@@ -6,7 +8,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+
 public class GameTest {
+
+
+    private HumanPlayer player;
 
     @org.junit.jupiter.api.Test
     void determinePlayableCards_checkAtoutInHandAtoutPlayed() {
@@ -189,6 +196,36 @@ public class GameTest {
         boolean secondTrumped = Game.trumpChecker(firstHandHard, secondHandCard, atoutCard);
 
         assertFalse(secondTrumped);
+    }
+
+    @org.junit.jupiter.api.Test
+    void setCardsPlayableFlagTrueCheck() {
+        List<Card> cards = new ArrayList<>();
+
+        cards.add(new Queen("♣"));
+        cards.add(new King("♠"));
+        cards.add(new Jack("♣"));
+
+        Game.setCardsPlayableFlag(cards, true);
+
+        assertTrue(cards.get(0).isPlayable);
+        assertTrue(cards.get(1).isPlayable);
+        assertTrue(cards.get(2).isPlayable);
+    }
+
+    @org.junit.jupiter.api.Test
+    void setCardsPlayableFlagFalseCheck() {
+        List<Card> cards = new ArrayList<>();
+
+        cards.add(new Queen("♣"));
+        cards.add(new King("♠"));
+        cards.add(new Jack("♣"));
+
+        Game.setCardsPlayableFlag(cards, false);
+
+        assertFalse(cards.get(0).isPlayable);
+        assertFalse(cards.get(1).isPlayable);
+        assertFalse(cards.get(2).isPlayable);
     }
 }
 
