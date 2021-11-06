@@ -156,6 +156,40 @@ public class GameTest {
 
         assertEquals(40, game.calculatePoints(stackCards));
     }
+
+
+    @org.junit.jupiter.api.Test
+    void cardTrumped_sameColor() {
+        Card firstHandHard = new Queen("♣");
+        Card secondHandCard = new King("♣");
+        Card atoutCard = new Ass("♦");
+
+        boolean secondTrumped = Game.trumpChecker(firstHandHard, secondHandCard, atoutCard);
+
+        assertTrue(secondTrumped);
+    }
+
+    @org.junit.jupiter.api.Test
+    void cardTrumped_playedAtout() {
+        Card firstHandHard = new King("♣");
+        Card secondHandCard = new Queen("♦");
+        Card atoutCard = new Ass("♦");
+
+        boolean secondTrumped = Game.trumpChecker(firstHandHard, secondHandCard, atoutCard);
+
+        assertTrue(secondTrumped);
+    }
+
+    @org.junit.jupiter.api.Test
+    void cardeTrumped_differenColor() {
+        Card firstHandHard = new King("♣");
+        Card secondHandCard = new Queen("♠");
+        Card atoutCard = new Ass("♦");
+
+        boolean secondTrumped = Game.trumpChecker(firstHandHard, secondHandCard, atoutCard);
+
+        assertFalse(secondTrumped);
+    }
 }
 
 
