@@ -88,7 +88,7 @@ public class GameUI {
     }
 
     public static void printGamePointsOfPlayer(Player player) {
-        System.out.println(player.getPlayerName() + " has scored " + player.getScoredPoints() + " points!");
+        System.out.println(player.getPlayerName() + " scored " + player.getScoredPoints() + " points!");
     }
 }
 

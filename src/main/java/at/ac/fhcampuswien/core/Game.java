@@ -150,12 +150,13 @@ public class Game {
 
         setCardsPlayableFlag(firstPlayer.handCards, true);
         Card firstCard = firstPlayer.chooseCard(atoutCard);
+        GameUI.printChosenCard(firstPlayer.playerName, firstCard);
+
         if(forceColor) {
             secondPlayer.handCards = determinePlayableCards(secondPlayer.handCards, atoutCard, firstCard);
         }
-        Card secondCard = secondPlayer.chooseCard(atoutCard, firstCard);
 
-        GameUI.printChosenCard(firstPlayer.playerName, firstCard);
+        Card secondCard = secondPlayer.chooseCard(atoutCard, firstCard);
         GameUI.printChosenCard(secondPlayer.playerName, secondCard);
 
         if (trumpChecker(firstCard, secondCard, this.atoutCard)) {
