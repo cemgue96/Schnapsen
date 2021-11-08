@@ -40,6 +40,8 @@ public class Game {
         this.artificialPlayer = new ArtificialPlayer("Computer");
         this.humanPlayer = new HumanPlayer("You");
         do {
+            GameUI.printNextRound();
+
             setupGameRound();
 
             //print the atout card
@@ -54,16 +56,22 @@ public class Game {
             GameUI.printPointsFinished(artificialPlayer.playerName, artificialPlayerPoints);
 
             if (humanPlayerPoints > artificialPlayerPoints) {
-                GameUI.printWinnerText(humanPlayer.playerName);
+                GameUI.printRoundWinnerText(humanPlayer.playerName);
                 humanPlayer.setScoredPoints(humanPlayer.getScoredPoints() + calculateGamePoints(artificialPlayer));
             } else {
-                GameUI.printWinnerText(artificialPlayer.playerName);
+                GameUI.printRoundWinnerText(artificialPlayer.playerName);
                 artificialPlayer.setScoredPoints(artificialPlayer.getScoredPoints() + calculateGamePoints(humanPlayer));
             }
             GameUI.printGamePointsOfPlayer(humanPlayer);
             GameUI.printGamePointsOfPlayer(artificialPlayer);
         }
         while (humanPlayer.getScoredPoints() < SCORE_TO_WIN && artificialPlayer.getScoredPoints() < SCORE_TO_WIN);
+
+        if (humanPlayer.getScoredPoints() > artificialPlayer.getScoredPoints()){
+            GameUI.printGameWinnerText(humanPlayer.getPlayerName());
+        } else {
+            GameUI.printGameWinnerText(artificialPlayer.getPlayerName());
+        }
     }
 
     private void setupGameRound() {
@@ -97,6 +105,7 @@ public class Game {
             }
             GameUI.printCurrentPoints(artificialPlayer.playerName, calculatePoints(artificialPlayer.stackCards));
             GameUI.printCurrentPoints(humanPlayer.playerName, calculatePoints(humanPlayer.stackCards));
+            GameUI.printNextPlay();
         }
     }
 
